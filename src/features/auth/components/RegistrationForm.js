@@ -25,7 +25,7 @@ const inputFields = [
     keyboardType: 'number-pad',
     sendOtp: true,
     onSendPress: () => console.log('Send OTP'),
-    marginVertical: 19,
+    marginVertical: 19, 
   },
   {
     key: 'password',
