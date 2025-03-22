@@ -6,7 +6,7 @@ import HomeScreen from '../features/home/screens/HomeScreen';
 import ActivityScreen from '../screens/Activity/ActivityScreen';
 import PromotionScreen from '../screens/Promotion/PromotionScreen';
 import WalletScreen from '../screens/Wallet/WalletScreen';
-import AccountScreen from '../screens/Account/AccountScreen'; 
+import AccountScreen from '../screens/Account/AccountScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +41,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
