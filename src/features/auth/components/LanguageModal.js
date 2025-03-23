@@ -16,7 +16,7 @@ import {languageData} from '../../../data/Data';
 import Fonts from '../../../theme/fonts';
 import {SvgXml} from 'react-native-svg';
 import CustomCheckbox from '../../../components/CustomCheckbox';
-import indiaFlag, {EnglishFlag} from '../../../../assets/svg/svgData';
+import {EnglishFlag} from '../../../../assets/svg/svgData';
 
 const LanguageModal = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -41,10 +41,14 @@ const LanguageModal = () => {
   }, []);
 
   const handleLanguageChange = async langParam => {
-    if (!langParam) return;
+    if (!langParam) {
+      return;
+    }
 
     const newLang = languageData.find(lang => lang.param === langParam);
-    if (!newLang) return;
+    if (!newLang) {
+      return;
+    }
 
     changeAppLanguage(langParam);
     setSelectedLang(newLang);

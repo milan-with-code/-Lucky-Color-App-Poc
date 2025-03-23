@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   input: {
+    flex:1,
     fontSize: 16,
     color: '#000',
     fontFamily: Fonts.regular,

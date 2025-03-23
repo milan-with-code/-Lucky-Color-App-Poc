@@ -2,59 +2,10 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import Fonts from '../../../theme/fonts';
 import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import CustomTextInput from '../../../components/CustomTextInput';
 import CustomCheckbox from '../../../components/CustomCheckbox';
 import CustomButton from '../../../components/CustomButton';
-
-const inputFields = [
-  {
-    key: 'phone',
-    placeholder: 'Please enter the phone number',
-    label: 'Phone Number',
-    iconName: 'smartphone',
-    IconType: Feather,
-    keyboardType: 'number-pad',
-  },
-  {
-    key: 'otp',
-    placeholder: 'Please enter the confirmation code',
-    label: 'Verification Code',
-    iconName: 'smartphone',
-    IconType: Feather,
-    keyboardType: 'number-pad',
-    sendOtp: true,
-    onSendPress: () => console.log('Send OTP'),
-    marginVertical: 19,
-  },
-  {
-    key: 'password',
-    placeholder: 'Set password',
-    label: 'Set Password',
-    iconName: 'lock',
-    IconType: Feather,
-    keyboardType: 'default',
-    secureTextEntry: true,
-  },
-  {
-    key: 'confirmPassword',
-    placeholder: 'Confirm password',
-    label: 'Confirm Password',
-    iconName: 'lock',
-    IconType: Feather,
-    keyboardType: 'default',
-    secureTextEntry: true,
-    marginVertical: 19,
-  },
-  {
-    key: 'invite',
-    placeholder: 'Please enter the invitation code',
-    label: 'Invite Code',
-    iconName: 'file-code',
-    IconType: FontAwesome6,
-    keyboardType: 'number-pad',
-  },
-];
+import {inputFields} from '../../../data/Data';
 
 const RegistrationForm = ({navigation, formType}) => {
   const [rememberMe, setRememberMe] = useState(false);
@@ -86,13 +37,19 @@ const RegistrationForm = ({navigation, formType}) => {
       <View style={styles.inputContainer}>
         {filteredFields.map((field, index) => (
           <CustomTextInput
-            key={index}
-            {...field}
-            customStyle={
-              index > 0
-                ? {marginVertical: field.marginVertical && field.marginVertical}
-                : {}
-            }
+            key={field.key}
+            {...{
+              placeholder: field.placeholder,
+              label: field.label,
+              iconName: field.iconName,
+              IconType: field.IconType,
+              keyboardType: field.keyboardType,
+              secureTextEntry: field.secureTextEntry,
+              sendOtp: field.sendOtp,
+              onSendPress: field.onSendPress,
+              customStyle:
+                index > 0 ? {marginVertical: field.marginVertical} : {},
+            }}
           />
         ))}
       </View>

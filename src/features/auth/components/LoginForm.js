@@ -6,15 +6,37 @@ import CustomTextInput from '../../../components/CustomTextInput';
 import Feather from 'react-native-vector-icons/Feather';
 import CustomCheckbox from '../../../components/CustomCheckbox';
 import CustomButton from '../../../components/CustomButton';
+import {loginUser} from '../../../api/authApi';
 
 const LoginForm = ({navigation}) => {
   const [loginTypeSelected, setSelectedLoginType] = useState(loginType[0].name);
   const [rememberMe, setRememberMe] = useState(false);
+  const [formData, setFormData] = useState({
+    emailOrPhone: '',
+    password: '',
+  });
 
   const handleLoginType = name => setSelectedLoginType(name);
 
   const {placeholder, iconName, IconType, label, keyboardType} =
     loginConfig[loginTypeSelected];
+
+  const handleLogin = async () => {
+    try {
+      const response = await loginUser(
+        `+91${formData.emailOrPhone}`,
+        formData.password,
+      );
+
+      setFormData({emailOrPhone: '', password: ''});
+
+      console.log('Login successful', response);
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || 'Something went wrong!';
+      console.log('Login Error:', errorMessage);
+    }
+  };
 
   return (
     <View>
@@ -63,6 +85,8 @@ const LoginForm = ({navigation}) => {
           placeholder={placeholder}
           iconSize={24}
           keyboardType={keyboardType}
+          value={formData.emailOrPhone}
+          onChangeText={text => setFormData({...formData, emailOrPhone: text})}
         />
         <CustomTextInput
           label="Password"
@@ -73,6 +97,8 @@ const LoginForm = ({navigation}) => {
           keyboardType="default"
           customStyle={styles.passwordInput}
           secureTextEntry={true}
+          value={formData.password}
+          onChangeText={text => setFormData({...formData, password: text})}
         />
       </View>
       <CustomCheckbox
@@ -81,7 +107,12 @@ const LoginForm = ({navigation}) => {
         checked={rememberMe}
       />
       <View>
-        <CustomButton title="Login" customStyle={{marginTop: 24}} />
+        <CustomButton
+          title="Login"
+          onPress={handleLogin}
+          customStyle={{marginTop: 24}}
+          disabled={!formData.emailOrPhone || !formData.password}
+        />
         <CustomButton
           title="Register"
           onPress={() => navigation.navigate('Register')}
@@ -126,7 +157,7 @@ const styles = {
   },
   loginTypeButton: {
     alignItems: 'center',
-    width: '49%',
+    width: '100%',
     padding: 10,
   },
   selectedLoginType: {
