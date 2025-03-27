@@ -2,11 +2,12 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import HomeScreen from '../features/home/screens/HomeScreen';
-import ActivityScreen from '../screens/Activity/ActivityScreen';
 import PromotionScreen from '../screens/Promotion/PromotionScreen';
 import WalletScreen from '../screens/Wallet/WalletScreen';
 import AccountScreen from '../screens/Account/AccountScreen';
+import ActivityScreen from '../features/activity/screen/ActivityScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,10 +26,10 @@ const CustomTabButton = ({children, onPress}) => (
     onPress={onPress}>
     <View
       style={{
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: '#ff5733',
+        width: 70,
+        height: 70,
+        borderRadius: 100,
+        backgroundColor: '#0063E6',
         justifyContent: 'center',
         alignItems: 'center',
       }}>
@@ -40,16 +41,21 @@ const CustomTabButton = ({children, onPress}) => (
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Activity"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          height: 60,
+          height: 80,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
           backgroundColor: '#ffffff',
           elevation: 5,
+        },
+        tabBarIconStyle: {
+          alignItems: 'center',
+          flex: 1,
         },
       }}>
       <Tab.Screen
@@ -66,7 +72,7 @@ const TabNavigator = () => {
         component={ActivityScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name="list-outline" color={color} size={25} />
+            <Feather name="shopping-bag" color={color} size={25} />
           ),
         }}
       />
@@ -76,7 +82,9 @@ const TabNavigator = () => {
         name="Promotion"
         component={PromotionScreen}
         options={{
-          tabBarIcon: ({color}) => <Icon name="star" color="#fff" size={30} />,
+          tabBarIcon: ({color}) => (
+            <Icon name="diamond-sharp" color="#fff" size={30} />
+          ),
           tabBarButton: props => <CustomTabButton {...props} />,
         }}
       />

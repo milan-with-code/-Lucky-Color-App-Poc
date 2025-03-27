@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Fonts from '../../../theme/fonts';
 import {customerSupport, loginConfig, loginType} from '../../../data/Data';
 import CustomTextInput from '../../../components/CustomTextInput';
@@ -7,6 +7,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import CustomCheckbox from '../../../components/CustomCheckbox';
 import CustomButton from '../../../components/CustomButton';
 import {loginUser} from '../../../api/authApi';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
 const LoginForm = ({navigation}) => {
   const [loginTypeSelected, setSelectedLoginType] = useState(loginType[0].name);
@@ -15,31 +16,71 @@ const LoginForm = ({navigation}) => {
     emailOrPhone: '',
     password: '',
   });
+  const [errors, setErrors] = useState();
 
   const handleLoginType = name => setSelectedLoginType(name);
 
   const {placeholder, iconName, IconType, label, keyboardType} =
     loginConfig[loginTypeSelected];
 
+  useEffect(() => {
+    if (errors) {
+      const timer = setTimeout(() => setErrors(), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
+
+  const validateForm = () => {
+    if (!formData.password) {
+      setErrors('Password is required');
+      return errors;
+    }
+  };
+
   const handleLogin = async () => {
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     try {
       const response = await loginUser(
         `+91${formData.emailOrPhone}`,
         formData.password,
       );
-
       setFormData({emailOrPhone: '', password: ''});
-
+      setErrors({});
       console.log('Login successful', response);
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || 'Something went wrong!';
-      console.log('Login Error:', errorMessage);
+      setErrors({
+        password: error.response?.data?.message || 'Invalid credentials!',
+      });
     }
   };
 
   return (
     <View>
+      {errors && (
+        <View
+          style={[
+            styles.errorPopup,
+            {width: '100%', justifyContent: 'center', alignItems: 'center'},
+          ]}>
+          <View
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, .7)',
+              padding: 16,
+              borderRadius: 8,
+              zIndex: 10,
+              alignItems: 'center',
+            }}>
+            <FontAwesome6 name="exclamation" color="white" size={20} />
+            <Text style={styles.errorText}>{errors}</Text>
+          </View>
+        </View>
+      )}
+
       <Text style={styles.title}>Log In</Text>
       <View style={styles.descriptionContainer}>
         <Text style={styles.description}>
@@ -111,7 +152,7 @@ const LoginForm = ({navigation}) => {
           title="Login"
           onPress={handleLogin}
           customStyle={{marginTop: 24}}
-          disabled={!formData.emailOrPhone || !formData.password}
+          disabled={!formData.emailOrPhone}
         />
         <CustomButton
           title="Register"
@@ -136,6 +177,16 @@ const LoginForm = ({navigation}) => {
 };
 
 const styles = {
+  errorPopup: {
+    position: 'absolute',
+
+    top: '40%',
+  },
+  errorText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: Fonts.bold,
+  },
   title: {
     fontSize: 24,
     fontFamily: Fonts.medium,

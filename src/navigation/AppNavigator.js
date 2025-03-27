@@ -11,12 +11,14 @@ const AppNavigator = () => {
   const {user} = useContext(AuthContext);
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        {user ? (
-          <Stack.Screen name="Main" component={TabNavigator} />
-        ) : (
-          <Stack.Screen name="Auth" component={AuthNavigator} />
-        )}
+      <Stack.Navigator
+        initialRouteName="Main"
+        screenOptions={{headerShown: false}}>
+        {/* {user ? ( */}
+        <Stack.Screen name="Main" component={TabNavigator} />
+        {/* ) : ( */}
+        <Stack.Screen name="Auth" component={AuthNavigator} />
+        {/* )} */}
       </Stack.Navigator>
     </NavigationContainer>
   );

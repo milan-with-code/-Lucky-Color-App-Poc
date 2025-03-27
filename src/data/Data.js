@@ -117,3 +117,69 @@ export const inputFields = [
     keyboardType: 'number-pad',
   },
 ];
+
+export const activityGridData = [
+  {
+    title: 'Activity\nAward',
+  },
+  {
+    title: 'Invitation\nbonus',
+  },
+  {
+    title: 'Betting\nrebate',
+  },
+  {
+    title: 'Super\nJackpot',
+  },
+];
+
+export const activityBigGridData = [
+  {
+    title: 'Gift',
+    description: 'Enter the redemption code to receive gift rewards',
+  },
+  {
+    title: 'Attendance bonus',
+    description:
+      'The more consecutive days you sign in, the higher the reward will be.',
+  },
+];
+
+export const featureGameSectionData = [
+  {
+    name: '🟢 Top up! Start your Lucky Wheel spin.',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_202408221740174vn2.png',
+  },
+  {
+    name: '🟢 RajaGames Anti-Fraud Reminder',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_202407081748393ko8.jpg',
+  },
+  {
+    name: '🟢 AR Wallet Activity Award',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20250122171720a2ck.jpg',
+  },
+  {
+    name: '🟢 Member First Deposit Bonus',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165625mtt4.png',
+  },
+  {
+    name: '🟢 Aviator (Slot) Extra Bonus',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165614sf8y.png',
+  },
+  {
+    name: '🟢 WinGo (1min) Winning Streak Reward',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165606cusg.png',
+  },
+  {
+    name: '🟢 Daily Task Bonus System',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165559hn8d.png',
+  },
+  {
+    name: '🟢 VIP Member Benefits Center',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165551hvq5.png',
+  },
+  {
+    name: '🟢 Member Betting Rebate',
+    url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165545ma75.png',
+  },
+];
