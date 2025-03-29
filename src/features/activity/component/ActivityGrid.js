@@ -1,25 +1,38 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {activityBigGridData, activityGridData} from '../../../data/Data';
 import Fonts from '../../../theme/fonts';
 
-const ActivityGrid = () => {
+const ActivityGrid = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.smallGrid}>
         {activityGridData.map((activity, index) => (
-          <View key={index}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            key={index}
+            onPress={() => {
+              if (!activity.route) return;
+              navigation.navigate(activity.route);
+            }}>
             <Text style={styles.smallText}>{activity.title}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
 
       <View style={styles.bigGrid}>
         {activityBigGridData.map((activity, index) => (
-          <View key={index} style={styles.bigGridItem}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              if (!activity.route) return;
+              navigation.navigate(activity.route);
+            }}
+            key={index}
+            style={styles.bigGridItem}>
             <Text style={styles.bigText}>{activity.title}</Text>
             <Text style={styles.bigText}>{activity.description}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     </View>
@@ -47,7 +60,7 @@ const styles = StyleSheet.create({
   },
   bigGridItem: {
     width: '48%',
-    backgroundColor: 'red',
+    backgroundColor: '#F0F0F0',
     borderRadius: 4,
   },
   bigText: {

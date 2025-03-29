@@ -121,15 +121,19 @@ export const inputFields = [
 export const activityGridData = [
   {
     title: 'Activity\nAward',
+    route: 'ActivityAward',
   },
   {
     title: 'Invitation\nbonus',
+    route: 'InvitationBonus',
   },
   {
     title: 'Betting\nrebate',
+    route: 'Rebate',
   },
   {
     title: 'Super\nJackpot',
+    route: 'SuperJackpot',
   },
 ];
 
@@ -137,11 +141,13 @@ export const activityBigGridData = [
   {
     title: 'Gift',
     description: 'Enter the redemption code to receive gift rewards',
+    route: 'RedeemGift',
   },
   {
     title: 'Attendance bonus',
     description:
       'The more consecutive days you sign in, the higher the reward will be.',
+    route: 'Attendance',
   },
 ];
 
@@ -181,5 +187,32 @@ export const featureGameSectionData = [
   {
     name: '🟢 Member Betting Rebate',
     url: 'https://ossimg.forpicstore777.top/rajalottery/banner/Banner_20240822165545ma75.png',
+  },
+];
+
+export const attendanceRewardListData = [
+  {
+    rewardMoney: '4.00',
+    rewardDay: '1 Day',
+  },
+  {
+    rewardMoney: '20.00',
+    rewardDay: '2 Day',
+  },
+  {
+    rewardMoney: '65.00',
+    rewardDay: '3 Day',
+  },
+  {
+    rewardMoney: '180.00',
+    rewardDay: '4 Day',
+  },
+  {
+    rewardMoney: '450.00',
+    rewardDay: '5 Day',
+  },
+  {
+    rewardMoney: '2,200.00',
+    rewardDay: '6 Day',
   },
 ];

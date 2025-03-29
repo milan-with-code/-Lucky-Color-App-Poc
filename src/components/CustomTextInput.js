@@ -28,12 +28,12 @@ const CustomTextInput = ({
 
   return (
     <View style={customStyle}>
-      <View style={styles.labelContainer}>
-        {IconType && (
+      {(IconType || label) && (
+        <View style={styles.labelContainer}>
           <IconType name={iconName} size={iconSize} color={iconColor} />
-        )}
-        {label && <Text style={styles.label}>{label}</Text>}
-      </View>
+          <Text style={styles.label}>{label}</Text>
+        </View>
+      )}
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   input: {
-    flex:1,
+    flex: 1,
     fontSize: 16,
     color: '#000',
     fontFamily: Fonts.regular,
